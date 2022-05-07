@@ -24,6 +24,7 @@ namespace DesktopCleaner
             string[] imageFormats = new string[] { "bmp", "png", "bmp", "jpg" };
             string[] bookFormats = new string[] { "fb2", "pdf", "epub" };
             string[] documentFormats = new string[] { "docx", "xlsx", "doc" };
+            string[] programFormats = new string[] { "exe", "lnk"};
 
             if (fileNames.Length != 0)
             {
@@ -33,72 +34,46 @@ namespace DesktopCleaner
                     var fileName = fullPath[fullPath.Length - 1];
                     var fileFormat = fileName.Split('.').Last();
 
-
                     // заменить IF'ы на что-то более мобильное, гибкое
                     if (imageFormats.Contains(fileFormat))
                     {
-                        var newPath = $@"{targetPlaceForClear}\ImagesARK6\{fileName}";
-                        File.Copy(file, newPath);
-                        if (File.Exists(newPath))
-                        {
-                            Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
-                            File.Delete(file);
-                        }
+                        CopyAndDeleteFile(targetPlaceForClear, "ImagesARK6", fileName, file);
                     }
                     else if (bookFormats.Contains(fileFormat))
                     {
-                        var newPath = $@"{targetPlaceForClear}\BooksARK6\{fileName}";
-                        File.Copy(file, newPath);
-                        if (File.Exists(newPath))
-                        {
-                            Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
-                            File.Delete(file);
-                        }
+                        CopyAndDeleteFile(targetPlaceForClear, "BooksARK6", fileName, file);
                     }
                     else if (fileFormat == "txt")
                     {
-                        var newPath = $@"{targetPlaceForClear}\TextFilesARK6\{fileName}";
-                        File.Copy(file, newPath);
-                        if (File.Exists(newPath))
-                        {
-                            Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
-                            File.Delete(file);
-                        }
+                        CopyAndDeleteFile(targetPlaceForClear, "TextFilesARK6", fileName, file);
                     }
                     else if (documentFormats.Contains(fileFormat))
                     {
-                        var newPath = $@"{targetPlaceForClear}\DocumentsARK6\{fileName}";
-                        File.Copy(file, newPath);
-                        if (File.Exists(newPath))
-                        {
-                            Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
-                            File.Delete(file);
-                        }
+                        CopyAndDeleteFile(targetPlaceForClear, "DocumentsARK6", fileName, file);
                     }
-                    else if (fileFormat == "exe")
+                    else if (programFormats.Contains(fileFormat))
                     {
-                        var newPath = $@"{targetPlaceForClear}\ProgramsARK6\{fileName}";
-                        File.Copy(file, newPath);
-                        if (File.Exists(newPath))
-                        {
-                            Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
-                            File.Delete(file);
-                        }
+                        CopyAndDeleteFile(targetPlaceForClear, "ProgramsARK6", fileName, file);
                     }
                     else
                     {
-                        var newPath = $@"{targetPlaceForClear}\OtherARK6\{fileName}";
-                        File.Copy(file, newPath);
-                        if (File.Exists(newPath))
-                        {
-                            Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
-                            File.Delete(file);
-                        }
+                        CopyAndDeleteFile(targetPlaceForClear, "OtherARK6", fileName, file);
                     }
                 }
             }
 
             Console.ReadLine(); 
+        }
+
+        static void CopyAndDeleteFile(string targetPlaceForClear, string folder, string fileName, string file) 
+        {
+            var newPath = $@"{targetPlaceForClear}\{folder}\{fileName}";
+            File.Copy(file, newPath);
+            if (File.Exists(newPath))
+            {
+                Console.WriteLine($"Файл {fileName} успешно скопирован и будет удалён.");
+                File.Delete(file);
+            }
         }
     }
 }
