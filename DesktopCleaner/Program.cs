@@ -11,16 +11,15 @@ namespace DesktopCleaner
         {
             Console.WriteLine("Я чистильщик, работаю шесть лет без заработной платы. На ваш страх и риск.");
 
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string targetPlaceForClear = @"C:\Users\BlackBroke\Desktop";
+            string[] fileNames = Directory.GetFiles(targetPlaceForClear);
 
-            string[] fileNames = Directory.GetFiles(desktopPath);
-
-            Directory.CreateDirectory(desktopPath + @"\ImagesARK6");
-            Directory.CreateDirectory(desktopPath + @"\BooksARK6");
-            Directory.CreateDirectory(desktopPath + @"\TextFilesARK6");
-            Directory.CreateDirectory(desktopPath + @"\DocumentsARK6");
-            Directory.CreateDirectory(desktopPath + @"\OtherARK6");
-            Directory.CreateDirectory(desktopPath + @"\ProgramsARK6");
+            Directory.CreateDirectory(targetPlaceForClear+ @"\ImagesARK6");
+            Directory.CreateDirectory(targetPlaceForClear+ @"\BooksARK6");
+            Directory.CreateDirectory(targetPlaceForClear+ @"\TextFilesARK6");
+            Directory.CreateDirectory(targetPlaceForClear+ @"\DocumentsARK6");
+            Directory.CreateDirectory(targetPlaceForClear+ @"\OtherARK6");
+            Directory.CreateDirectory(targetPlaceForClear+ @"\ProgramsARK6");
 
             string[] imageFormats = new string[] { "bmp", "png", "bmp", "jpg" };
             string[] bookFormats = new string[] { "fb2", "pdf", "epub" };
@@ -38,27 +37,27 @@ namespace DesktopCleaner
                     // заменить IF'ы на что-то более мобильное, гибкое
                     if (imageFormats.Contains(fileFormat))
                     {
-                        CopyAndDeleteFile(desktopPath, "ImagesARK6", fileName, file);
+                        CopyAndDeleteFile(targetPlaceForClear, "ImagesARK6", fileName, file);
                     }
                     else if (bookFormats.Contains(fileFormat))
                     {
-                        CopyAndDeleteFile(desktopPath, "BooksARK6", fileName, file);
+                        CopyAndDeleteFile(targetPlaceForClear, "BooksARK6", fileName, file);
                     }
                     else if (fileFormat == "txt")
                     {
-                        CopyAndDeleteFile(desktopPath, "TextFilesARK6", fileName, file);
+                        CopyAndDeleteFile(targetPlaceForClear, "TextFilesARK6", fileName, file);
                     }
                     else if (documentFormats.Contains(fileFormat))
                     {
-                        CopyAndDeleteFile(desktopPath, "DocumentsARK6", fileName, file);
+                        CopyAndDeleteFile(targetPlaceForClear, "DocumentsARK6", fileName, file);
                     }
                     else if (programFormats.Contains(fileFormat))
                     {
-                        CopyAndDeleteFile(desktopPath, "ProgramsARK6", fileName, file);
+                        CopyAndDeleteFile(targetPlaceForClear, "ProgramsARK6", fileName, file);
                     }
                     else
                     {
-                        CopyAndDeleteFile(desktopPath, "OtherARK6", fileName, file);
+                        CopyAndDeleteFile(targetPlaceForClear, "OtherARK6", fileName, file);
                     }
                 }
             }
