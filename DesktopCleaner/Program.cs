@@ -10,8 +10,8 @@ namespace DesktopCleaner
         static void Main(string[] args)
         {
             Console.WriteLine("Я чистильщик, работаю шесть лет без заработной платы. На ваш страх и риск.");
-
-            string targetPlaceForClear = @"C:\Users\BlackBroke\Desktop";
+            
+            string targetPlaceForClear = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string[] fileNames = Directory.GetFiles(targetPlaceForClear);
 
             Directory.CreateDirectory(targetPlaceForClear+ @"\ImagesARK6");
